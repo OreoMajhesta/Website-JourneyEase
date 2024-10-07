@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+//import { useLocation } from 'react-router-dom';
 import useHandleLinkClick from '../functions/handleLinkClick';
 import { useTheme } from '../functions/ThemeContext';
 import { icons } from '../../assets/icons/icons';
