@@ -9,17 +9,8 @@ const Navbar = () => {
     const [isNavbarVisible, setNavbarVisible] = useState(true);
     const prevScrollY = useRef(0);
     const timeoutRef = useRef<number | null>(null);
-    const [hoveredButton, setHoveredButton] = useState<string | null>(null);
     const location = useLocation();
     const handleLinkClick = useHandleLinkClick();
-
-    const handleMouseEnter = (buttonId: string) => {
-        setHoveredButton(buttonId);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredButton(null);
-    };
 
     useEffect(() => {
         const handleScroll = () => {
