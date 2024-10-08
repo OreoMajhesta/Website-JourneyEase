@@ -1,15 +1,11 @@
-import { GiHamburgerMenu } from "react-icons/gi";
-import { MdArrowBack, MdArrowForward, MdLightMode, MdDarkMode, MdOutlineMonetizationOn, MdListAlt } from "react-icons/md";
-import { AiOutlineFieldTime } from "react-icons/ai";
+import { MdArrowBack, MdArrowForward, MdLightMode, MdDarkMode, MdOutlineMonetizationOn } from "react-icons/md";
+import { AiOutlineFieldTime, AiOutlineHome, AiOutlineInfoCircle, AiOutlineTag } from "react-icons/ai";
 import { RiShieldKeyholeLine } from "react-icons/ri"; 
-import { BsChatLeftText } from "react-icons/bs";
-import { GoHome } from "react-icons/go";
+import { BsChat } from 'react-icons/bs';
 
 export const icons = {
-    GiHamburgerMenu,
-    MdArrowBack, MdArrowForward, MdDarkMode, MdLightMode, MdOutlineMonetizationOn, MdListAlt,
-    AiOutlineFieldTime,
+    MdArrowBack, MdArrowForward, MdDarkMode, MdLightMode, MdOutlineMonetizationOn,
+    AiOutlineFieldTime, AiOutlineHome, AiOutlineInfoCircle, AiOutlineTag,
     RiShieldKeyholeLine,
-    BsChatLeftText,
-    GoHome
+    BsChat
 };

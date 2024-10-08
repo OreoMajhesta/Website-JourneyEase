@@ -35,7 +35,7 @@ const CarouselBanner = () => {
     }, [currentSlide]);
 
     return (
-        <section className='pt-28'>
+        <section>
             <div className="relative container mx-auto h-auto overflow-hidden shadow-xl rounded-3xl">
                 <div
                     className="flex transition-transform duration-1000 ease-in-out"
@@ -56,13 +56,13 @@ const CarouselBanner = () => {
 
                 <button
                     onClick={prevSlide}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white px-3 py-2 rounded-md text-5xl font-bold text-center cursor-pointer"
+                    className="absolute md:left-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white px-3 py-2 rounded-md text-2xl md:text-5xl font-bold text-center cursor-pointer"
                 >
                     <icons.MdArrowBack />
                 </button>
                 <button
                     onClick={nextSlide}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white px-3 py-2 rounded-md text-5xl font-bold text-center cursor-pointer"
+                    className="absolute right-0 md:right-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white px-3 py-2 rounded-md text-2xl md:text-5xl font-bold text-center cursor-pointer"
                 >
                     <icons.MdArrowForward />
                 </button>

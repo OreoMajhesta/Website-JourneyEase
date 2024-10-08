@@ -9,17 +9,8 @@ const Navbar = () => {
     const [isNavbarVisible, setNavbarVisible] = useState(true);
     const prevScrollY = useRef(0);
     const timeoutRef = useRef<number | null>(null);
-    const [hoveredButton, setHoveredButton] = useState<string | null>(null);
     const location = useLocation();
     const handleLinkClick = useHandleLinkClick();
-
-    const handleMouseEnter = (buttonId: string) => {
-        setHoveredButton(buttonId);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredButton(null);
-    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -71,7 +62,7 @@ const Navbar = () => {
                         <ul className="hidden md:flex items-center gap-x-5 lg:gap-x-10 font-normal">
                             <li>
                                 <button
-                                    onClick={() => handleLinkClick('price')}
+                                    onClick={() => handleLinkClick('PriceList')}
                                     className="text-md underline-offset-4 hover:underline lg:text-xl xl:text-2xl font-Poppins"
                                 >
                                     Price List
@@ -104,14 +95,14 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <div className="fixed z-50 bottom-0 w-full md:hidden bg-white dark:bg-black border-t border-sky-500 dark:border-gray-700 pb-2">
+            <div className={`fixed z-50 bottom-0 w-full md:hidden transition-all duration-200 ${isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'} border-t border-sky-500 dark:border-gray-700 pb-2`}>
                 <ul className="flex justify-around items-center font-normal">
                     <li>
                         <button
                             onClick={() => handleLinkClick('/chat')}
                             className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
-                            <icons.GoHome className='text-4xl transition-all duration-500 hover:scale-110'/>
+                            <icons.AiOutlineHome className='text-4xl transition-all duration-500 hover:scale-110'/>
                         </button>
                     </li>
                     <li>
@@ -119,7 +110,15 @@ const Navbar = () => {
                             onClick={() => handleLinkClick('/chat')}
                             className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
-                            <icons.MdListAlt className='text-4xl transition-all duration-500 hover:scale-110'/>
+                            <icons.AiOutlineInfoCircle className='text-4xl transition-all duration-500 hover:scale-110'/>
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            onClick={() => handleLinkClick('PriceList')}
+                            className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
+                        >
+                            <icons.AiOutlineTag className='text-4xl transition-all duration-500 hover:scale-110'/>
                         </button>
                     </li>
                     <li>
@@ -127,15 +126,7 @@ const Navbar = () => {
                             onClick={() => handleLinkClick('/chat')}
                             className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
-                            <icons.BsChatLeftText className='text-4xl transition-all duration-500 hover:scale-110'/>
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => handleLinkClick('/chat')}
-                            className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
-                        >
-                            <icons.BsChatLeftText className='text-4xl transition-all duration-500 hover:scale-110'/>
+                            <icons.BsChat className='text-4xl transition-all duration-500 hover:scale-110'/>
                         </button>
                     </li>
                 </ul>
