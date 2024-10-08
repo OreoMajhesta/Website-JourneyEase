@@ -8,7 +8,7 @@ const Navbar = () => {
     const { isDarkTheme } = useTheme();
     const [isNavbarVisible, setNavbarVisible] = useState(true);
     const prevScrollY = useRef(0);
-    const timeoutRef = useRef<number | null>(null);
+    const timeoutRef = useRef<NodeJS.Timeout | number | null>(null);
     const handleLinkClick = useHandleLinkClick();
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const Navbar = () => {
                             className="h-8 lg:h-10 xl:h-14 w-auto cursor-pointer hover:rotate-180 transition"
                             onClick={() => handleLinkClick('/')}
                         />
-                        <a className="text-2xl lg:text-3xl xl:text-4xl font-Rajdhani">JOURNEY EASE</a>
+                        <h1 className="text-2xl lg:text-3xl xl:text-4xl font-Rajdhani font-bold">JOURNEY EASE</h1>
                     </div>
 
                     <div className="flex items-center gap-x-5 lg:gap-x-10">
@@ -62,7 +62,7 @@ const Navbar = () => {
                             <li>
                                 <button
                                     onClick={() => handleLinkClick('PriceList')}
-                                    className="text-md underline-offset-4 hover:underline lg:text-xl xl:text-2xl font-Poppins"
+                                    className="text-md underline-offset-4 hover:underline lg:text-xl xl:text-2xl font-Poppins font-b"
                                 >
                                     Price List
                                 </button>

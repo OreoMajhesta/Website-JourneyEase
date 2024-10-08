@@ -48,8 +48,9 @@ const CarouselBanner = () => {
                             <img
                                 src={slide.image}
                                 alt={`Slide ${index + 1}`}
-                                className={`w-full h-full object-cover  transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''}`}
+                                className={`w-full h-full object-cover transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''}`}
                             />
+
                         </div>
                     ))}
                 </div>

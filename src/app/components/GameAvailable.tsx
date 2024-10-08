@@ -42,7 +42,7 @@ const GameAvailable = () => {
                             <img
                                 src={game.logo}
                                 alt={game.name}
-                                className={`w-full h-20 sm:h-32 rounded-t-2xl object-cover transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''
+                                className={`object-cover w-full h-20 sm:h-32 rounded-t-2xl transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''
                                     }`}
                             />
                             <div className="flex flex-col md:flex-row justify-between md:items-center w-full px-2 sm:px-4 py-3 sm:py-4">
