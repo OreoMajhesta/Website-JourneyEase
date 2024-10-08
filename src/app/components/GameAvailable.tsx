@@ -24,11 +24,11 @@ const GameAvailable = () => {
     const { isDarkTheme } = useTheme();
 
     return (
-        <div className="container mx-auto my-8 px-5">
+        <div className="container mx-auto my-8">
             <div className="flex justify-between items-center mb-3">
                 <h2 className="text-xl md:text-3xl font-bold font-Poppins">Available Games</h2>
-                <h2 className="text-lg md:text-2xl cursor-pointer underline hover:underline font-Poppins">
-                    Tampilkan Semua
+                <h2 className="text-lg md:text-2xl cursor-pointer hover:underline font-Poppins">
+                    Lihat Semua
                 </h2>
             </div>
 

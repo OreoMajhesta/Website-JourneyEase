@@ -36,7 +36,7 @@ const CarouselBanner = () => {
 
     return (
         <section>
-            <div className="relative container mx-auto h-auto overflow-hidden shadow-xl rounded-3xl">
+            <div className="relative container mx-auto h-auto overflow-hidden shadow-xl Hp:rounded-3xl -px-40">
                 <div
                     className="flex transition-transform duration-1000 ease-in-out"
                     style={{
@@ -72,7 +72,7 @@ const CarouselBanner = () => {
                     {slides.map((_, index) => (
                         <div
                             key={index}
-                            className={`w-5 h-5 rounded-full cursor-pointer transition-all duration-500 ${currentSlide === index ? 'bg-sky-500 w-16' : 'bg-gray-400'}`}
+                            className={`Hp:w-5 Hp:h-5 w-4 h-4 rounded-full cursor-pointer transition-all duration-500 ${currentSlide === index ? 'bg-sky-500 w-10 Hp:w-14' : 'bg-gray-400'}`}
                             onClick={() => setCurrentSlide(index)}
                         />
                     ))}
