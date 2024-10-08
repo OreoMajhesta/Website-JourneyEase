@@ -11,7 +11,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="PriceList" element={<PriceList />} />
+          <Route path="/PriceList" element={<PriceList />} />
         </Routes>
       </Router>
     </ThemeProvider>

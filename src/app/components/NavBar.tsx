@@ -98,7 +98,7 @@ const Navbar = () => {
                 <ul className="flex justify-around items-center font-normal">
                     <li>
                         <button
-                            onClick={() => handleLinkClick('/chat')}
+                            onClick={() => handleLinkClick('/')}
                             className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.AiOutlineHome className='text-4xl transition-all duration-500 hover:scale-110'/>
@@ -106,7 +106,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <button
-                            onClick={() => handleLinkClick('/chat')}
+                            onClick={() => handleLinkClick('/')}
                             className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.AiOutlineInfoCircle className='text-4xl transition-all duration-500 hover:scale-110'/>
@@ -122,7 +122,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <button
-                            onClick={() => handleLinkClick('/chat')}
+                            onClick={() => handleLinkClick('/')}
                             className="flex flex-col text-sm transition-all duration-500 hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.BsChat className='text-4xl transition-all duration-500 hover:scale-110'/>
