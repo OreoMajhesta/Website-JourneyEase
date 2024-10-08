@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import pricelistitems from "../../assets/data/PriceListData"
-import { useTheme } from '../functions/ThemeContext';
 
 const PriceList = () => {
     const [selectedGame, setSelectedGame] = useState(pricelistitems[0]);
-    const { isDarkTheme } = useTheme();
-
     return (
         <div className="max-w-7xl mx-auto p-4">
             <div className="flex justify-center gap-5 md:gap-20 mb-8">

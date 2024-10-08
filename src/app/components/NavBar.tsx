@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import useHandleLinkClick from '../functions/handleLinkClick';
 import { useTheme } from '../functions/ThemeContext';
 import { icons } from '../../assets/icons/icons';
@@ -9,7 +8,6 @@ const Navbar = () => {
     const [isNavbarVisible, setNavbarVisible] = useState(true);
     const prevScrollY = useRef(0);
     const timeoutRef = useRef<number | null>(null);
-    const location = useLocation();
     const handleLinkClick = useHandleLinkClick();
 
     useEffect(() => {
