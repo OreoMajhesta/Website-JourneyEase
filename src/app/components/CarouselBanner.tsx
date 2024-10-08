@@ -45,12 +45,15 @@ const CarouselBanner = () => {
                 >
                     {slides.map((slide, index) => (
                         <div key={index} className="w-full h-full flex-shrink-0">
-                            <img
+                            <div clasname="w-full h-full">
+                                <img
                                 src={slide.image}
                                 alt={`Slide ${index + 1}`}
-                                className={`w-full h-full object-cover transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''}`}
-                            />
-
+                                className={`object-cover transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''}`}
+                                width={500}
+                                height={500}
+                                />
+                            </div>
                         </div>
                     ))}
                 </div>
