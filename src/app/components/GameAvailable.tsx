@@ -1,19 +1,22 @@
-// GameAvailable.tsx
 import { useTheme } from '../functions/ThemeContext';
 import AnimationInBottom from '../animation/AnimationInBottom';
+import { useNavigate } from 'react-router-dom';
 
 const games = [
     {
+        id: 1,
         logo: '/Genshin_Impact.png',
         name: 'Genshin Impact',
         developer: 'Hoyoverse',
     },
     {
+        id: 2,
         logo: '/Honkai_Star_Rail.png',
         name: 'Honkai Star Rail',
         developer: 'Hoyoverse',
     },
     {
+        id: 3,
         logo: '/Wuthering_Waves.png',
         name: 'Wuthering Waves',
         developer: 'Kuro Games',
@@ -22,6 +25,11 @@ const games = [
 
 const GameAvailable = () => {
     const { isDarkTheme } = useTheme();
+    const navigate = useNavigate();
+
+    const handleGameClick = (gameId: number) => {
+        navigate(`/order/${gameId}`);
+    };
 
     return (
         <div className="container mx-auto my-8">
@@ -36,6 +44,7 @@ const GameAvailable = () => {
                 {games.map((game, index) => (
                     <AnimationInBottom key={index} delay={(index + 1) * 0.2} duration={1} once={false}>
                         <div
+                            onClick={() => handleGameClick(game.id)}
                             className={`shadow-xl rounded-2xl flex flex-col items-center transition-all duration-500 ${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'
                                 } hover:scale-105 cursor-pointer`}
                         >
@@ -44,6 +53,8 @@ const GameAvailable = () => {
                                 alt={game.name}
                                 className={`object-cover w-full h-20 sm:h-32 rounded-t-2xl transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''
                                     }`}
+                                width={500}
+                                height={500}
                             />
                             <div className="flex flex-col md:flex-row justify-between md:items-center w-full px-2 sm:px-4 py-3 sm:py-4">
                                 <h3 className="text-md lg:text-lg xl:text-2xl font-semibold font-Poppins">{game.name}</h3>

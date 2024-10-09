@@ -45,10 +45,13 @@ const CarouselBanner = () => {
                 >
                     {slides.map((slide, index) => (
                         <div key={index} className="w-full h-full flex-shrink-0">
+                            <div></div>
                             <img
                                 src={slide.image}
                                 alt={`Slide ${index + 1}`}
-                                className={`w-full h-full object-cover transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''}`}
+                                className={`h-full w-full object-cover transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''}`}
+                                width={500}
+                                height={500}
                             />
 
                         </div>
@@ -72,7 +75,7 @@ const CarouselBanner = () => {
                     {slides.map((_, index) => (
                         <div
                             key={index}
-                            className={`Hp:w-5 Hp:h-5 w-4 h-4 rounded-full cursor-pointer transition-all duration-500 ${currentSlide === index ? 'bg-sky-500 w-10 Hp:w-14' : 'bg-gray-400'}`}
+                            className={`Hp:w-5 Hp:h-5 w-3 h-3 rounded-full cursor-pointer transition-all duration-500 ${currentSlide === index ? 'bg-sky-500 w-8 Hp:w-16' : 'bg-gray-400'}`}
                             onClick={() => setCurrentSlide(index)}
                         />
                     ))}

@@ -52,6 +52,8 @@ const Navbar = () => {
                             src="/logo.png"
                             alt="Logo"
                             className="h-8 lg:h-10 xl:h-14 w-auto cursor-pointer hover:rotate-180 transition"
+                            width={500}
+                            height={500}
                         />
                         <h1 className="text-xl lg:text-3xl xl:text-4xl font-Rajdhani font-bold">JOURNEY EASE</h1>
                     </div>
@@ -68,7 +70,7 @@ const Navbar = () => {
                             </li>
                             <li>
                                 <button
-                                    onClick={() => handleLinkClick('PriceList')}
+                                    onClick={() => handleLinkClick('/pricelist')}
                                     className="text-md underline-offset-4 hover:underline lg:text-xl xl:text-2xl font-Poppins font-b"
                                 >
                                     Price List
@@ -76,7 +78,7 @@ const Navbar = () => {
                             </li>
                             <li>
                                 <button
-                                    onClick={() => handleLinkClick('/chat')}
+                                    onClick={() => handleLinkClick('/contact')}
                                     className="text-md underline-offset-4 hover:underline lg:text-xl xl:text-2xl font-Poppins"
                                 >
                                     Consultation
@@ -113,7 +115,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <button
-                            onClick={() => handleLinkClick('PriceList')}
+                            onClick={() => handleLinkClick('/pricelist')}
                             className="flex flex-col text-sm hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.AiOutlineTag className='text-4xl hover:scale-110'/>
@@ -121,7 +123,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <button
-                            onClick={() => handleLinkClick('/')}
+                            onClick={() => handleLinkClick('/contact')}
                             className="flex flex-col text-sm hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.BsChat className='text-4xl hover:scale-110'/>

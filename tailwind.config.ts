@@ -16,13 +16,12 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      fontFamily: {
-        Poppins: ['Poppins'],
-        Rajdhani: ['Rajdhani'],
-        
-      },
       screens: {
         'Hp': '500px',
+      },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+        Rajdhani: ['Rajdhani'],
       },
     },
   },

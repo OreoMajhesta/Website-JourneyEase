@@ -1,21 +1,21 @@
-const videos = [
-    {
-        id: 'KwJJK2xilVQ',
-        title: 'Tutorial Video 1',
-    },
-    {
-        id: '7RcPpYjJeA8',
-        title: 'Tutorial Video 2',
-    },
-    {
-        id: '-S6ImxIia_A',
-        title: 'Tutorial Video 3',
-    },
-    {
-        id: '5mR9FggWIiM',
-        title: 'Tutorial Video 4',
-    },
-];
+// const videos = [
+//     {
+//         id: 'KwJJK2xilVQ',
+//         title: 'Tutorial Video 1',
+//     },
+//     {
+//         id: '7RcPpYjJeA8',
+//         title: 'Tutorial Video 2',
+//     },
+//     {
+//         id: '-S6ImxIia_A',
+//         title: 'Tutorial Video 3',
+//     },
+//     {
+//         id: '5mR9FggWIiM',
+//         title: 'Tutorial Video 4',
+//     },
+// ];
 
 const YoutubeLive = () => {
     return (
@@ -23,7 +23,8 @@ const YoutubeLive = () => {
             <h1 className="text-2xl md:text-5xl font-bold mb-1 md:mb-10 font-Poppins">
                 Tutorial Videos
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full container px-4">
+            <h1 className=" text-4xl lg:text-7xl font-extrabold">turned off due to performance issues on the website </h1>
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full container px-4">
                 {videos.map((video, index) => (
                     <div key={index} className="relative w-full h-0" style={{ paddingBottom: '56.25%' }}>
                         <iframe
@@ -37,7 +38,7 @@ const YoutubeLive = () => {
                         <h2 className="text-lg font-semibold text-center mt-4">{video.title}</h2>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </section>
     );
 };

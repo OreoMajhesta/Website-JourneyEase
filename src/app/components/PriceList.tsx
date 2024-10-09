@@ -1,8 +1,15 @@
+import React from 'react';
 import { useState } from 'react';
-import pricelistitems from "../../assets/data/PriceListData"
+import pricelistitems from "../../assets/data/PriceListData";
+
+interface Item {
+    item: string;
+    price: string;
+}
 
 const PriceList = () => {
     const [selectedGame, setSelectedGame] = useState(pricelistitems[0]);
+
     return (
         <div className="max-w-7xl mx-auto p-4">
             <div className="flex justify-center gap-5 md:gap-20 mb-8">
@@ -28,18 +35,19 @@ const PriceList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {selectedGame.pricelist.length > 0 ? (
-                            selectedGame.pricelist.map((item, index) => (
-                                <tr key={index} className="border-t border-gray-300">
-                                    <td className="p-4 border w-3/4 border-gray-300">{item.item}</td>
-                                    <td className="p-4 border border-gray-300">{item.price}</td>
+                        {Object.entries(selectedGame.categories).map(([category, items], idx) => (
+                            <React.Fragment key={idx}>
+                                <tr className="bg-gray-200">
+                                    <td colSpan={2} className="p-4 font-semibold text-gray-700 text-center">{category}</td>
                                 </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td className="p-4 text-center border border-gray-300">No pricing available</td>
-                            </tr>
-                        )}
+                                {(items as Item[]).map((item, index) => (
+                                    <tr key={index} className="border-t border-gray-300">
+                                        <td className="p-4 border w-3/4 border-gray-300">{item.item}</td>
+                                        <td className="p-4 border border-gray-300">{item.price}</td>
+                                    </tr>
+                                ))}
+                            </React.Fragment>
+                        ))}
                     </tbody>
                 </table>
             </div>
