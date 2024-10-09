@@ -45,7 +45,6 @@ const CarouselBanner = () => {
                 >
                     {slides.map((slide, index) => (
                         <div key={index} className="w-full h-full flex-shrink-0">
-                            <div></div>
                             <img
                                 src={slide.image}
                                 alt={`Slide ${index + 1}`}
