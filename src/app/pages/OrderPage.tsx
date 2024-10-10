@@ -8,7 +8,7 @@ export default function OrderPage() {
     return(
         <div className={`transition-colors duration-500 ${isDarkTheme ? 'bg-slate-950 text-white' : 'bg-slate-100 text-black'}`}>
             <NavBar />
-            <div className="px-4 lg:px-0 top-20 pt-28">
+            <div className="px-4 sm:px-4 top-20 pt-28">
                 <Order />
             </div>           
             <Footer />

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { icons } from '../../assets/icons/icons';
-import { useTheme } from '../functions/ThemeContext';
 
 const slides = [
     {
@@ -15,7 +14,6 @@ const slides = [
 ];
 
 const CarouselBanner = () => {
-    const { isDarkTheme } = useTheme();
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const nextSlide = () => {
@@ -48,7 +46,7 @@ const CarouselBanner = () => {
                             <img
                                 src={slide.image}
                                 alt={`Slide ${index + 1}`}
-                                className={`h-full w-full object-cover transition-all duration-500 ${isDarkTheme ? 'filter grayscale hover:grayscale-0' : ''}`}
+                                className="h-full w-full object-cover transition-all duration-500"
                                 width={500}
                                 height={500}
                             />

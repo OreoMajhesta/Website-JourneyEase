@@ -4,9 +4,9 @@ const pricelistdata = [
         name: 'Genshin Impact',
         image: '/Genshin_Impact.png',
         categories: {
-            'Daily Tasks': [
-                { item: 'Daily Commissions (per hari)', price: 'Rp 20,000' },
-                { item: 'Daily Resin Burn (160 resin)', price: 'Rp 20,000' },
+            'Daily': [
+                { item: 'Daily Commissions (per hari)', price: 'Rp 5,000' },
+                { item: 'Daily Resin Burn (160 resin)', price: 'Rp 5,000' },
                 { item: 'Expedition Collecting (1 hari)', price: 'Rp 15,000' },
             ],
             'Weekly Tasks': [
@@ -19,7 +19,7 @@ const pricelistdata = [
                 { item: 'Weapon Ascension Materials Farming (1 jam)', price: 'Rp 35,000' },
                 { item: 'Character Ascension Materials Farming (1 jam)', price: 'Rp 40,000' },
             ],
-            'Special Tasks': [
+            'Spiral Abbys': [
                 { item: 'Spiral Abyss 9-12 Clear', price: 'Rp 150,000' },
                 { item: 'Spiral Abyss 1-12 Full Clear', price: 'Rp 300,000' },
                 { item: 'Event Clear (1 event)', price: 'Rp 100,000' },

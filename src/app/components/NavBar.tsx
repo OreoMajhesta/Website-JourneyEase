@@ -51,15 +51,15 @@ const Navbar = () => {
                         <img
                             src="/logo.png"
                             alt="Logo"
-                            className="h-8 lg:h-10 xl:h-14 w-auto cursor-pointer hover:rotate-180 transition"
+                            className="h-8 lg:h-10 xl:h-12 w-auto cursor-pointer"
                             width={500}
                             height={500}
                         />
-                        <h1 className="text-xl lg:text-3xl xl:text-4xl font-Rajdhani font-bold">JOURNEY EASE</h1>
+                        <h1 className="text-3xl lg:text-4xl xl:text-5xl font-Rajdhani font-bold">Om JOKI</h1>
                     </div>
 
                     <div className="flex items-center gap-x-5 lg:gap-x-10">
-                        <ul className="hidden md:flex items-center gap-x-5 lg:gap-x-10 font-normal">
+                        <ul className="hidden lg:flex items-center gap-x-5 lg:gap-x-10 font-normal">
                             <li>
                                 <button
                                     onClick={() => handleLinkClick('/')}
@@ -95,7 +95,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <div className={`fixed z-50 bottom-0 w-full md:hidden transition-all duration-500 ${isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'} border-t border-sky-500 dark:border-gray-700 pb-2`}>
+            <div className={`fixed z-50 bottom-0 w-full lg:hidden transition-all duration-500 ${isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'} border-t border-sky-500 dark:border-gray-700 pb-2`}>
                 <ul className="flex justify-around items-center font-normal">
                     <li>
                         <button
