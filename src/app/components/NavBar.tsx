@@ -70,7 +70,7 @@ const Navbar = () => {
                             </li>
                             <li>
                                 <button
-                                    onClick={() => handleLinkClick('/pricelist')}
+                                    onClick={() => handleLinkClick('pricelist')}
                                     className="text-md underline-offset-4 hover:underline lg:text-xl xl:text-2xl font-Poppins font-b"
                                 >
                                     Price List

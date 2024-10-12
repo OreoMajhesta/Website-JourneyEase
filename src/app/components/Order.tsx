@@ -40,7 +40,7 @@ const Order = () => {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 {/* Left Section - Game Info */}
                 <div className="lg:col-span-1">
-                    <div className={`${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'} shadow-lg rounded-lg p-4 px-14 lg:px-4`}>
+                    <div className={`${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'} shadow-lg rounded-lg p-8 Hp:px-14 lg:px-4`}>
                         <div className='grid grid-cols-2 lg:grid-cols-1 gap-10 items-center'>
                             <h2 className="hidden lg:flex text-2xl font-bold font-Poppins mt-4 mb-2">{gameData.name}</h2>
                             <img src={gameData.image} alt={gameData.name} className="w-3/4 lg:w-full h-auto rounded" width={500} height={500} />
@@ -48,15 +48,17 @@ const Order = () => {
                         </div>
                         <p className="my-2 font-semibold font-Poppins">DESKRIPSI PRODUK</p>
                         <hr className="border-t my-4 border-slate-300" />
-                        <p>
-                            {showMore ? "" :
-                                "Kami mempersembahkan layanan yang cepat, murah, serta aman dan terpercaya! Tingkatkan akun anda  dengan bantuan dari profesional kami. Kami mengutamakan kepuasan dan keamanan akun Anda dalam setiap jasa yang kami berikan."
+                        <p className='text-justify'>
+                            {showMore ? 
+                                "Kami mempersembahkan layanan yang cepat, murah, serta aman dan terpercaya! Tingkatkan akun anda  dengan bantuan dari profesional kami. Kami mengutamakan kepuasan dan keamanan akun Anda dalam setiap jasa yang kami berikan." 
+                                :
+                                ""
                             }
                         </p>
                         <div>
                             <button onClick={() => setShowMore(!showMore)} className="text-blue-500 underline mt-2 flex items-center">
-                                {showMore ? 'Lihat lebih banyak' : 'Lihat lebih sedikit'}
-                                {showMore ? <IoIosArrowDown className="ml-2" /> : <IoIosArrowUp className="ml-2" />}
+                                {showMore ? 'Lihat lebih sedikit' : 'Lihat lebih banyak'}
+                                {showMore ? <IoIosArrowUp className="ml-2" /> : <IoIosArrowDown className="ml-2" />}
                             </button>
                         </div>
                     </div>

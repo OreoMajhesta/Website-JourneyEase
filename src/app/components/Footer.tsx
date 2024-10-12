@@ -23,6 +23,7 @@ const Footer = () => {
                     )}
                 </button>
             </div>
+            <div className='mb-14'></div>
         </footer>
     );
 }
