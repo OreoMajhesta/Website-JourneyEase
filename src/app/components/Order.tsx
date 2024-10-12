@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useMemo, useRef, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import pricelistdata from '../../assets/data/PriceListData';
+import paymentMethods from '../../assets/data/PaymentMethod'
 import { useTheme } from '../functions/ThemeContext';
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { FaAngleUp, FaAngleDown } from "react-icons/fa";
+
+
 
 interface Item {
     item: string;
@@ -12,76 +17,217 @@ interface Item {
 const Order = () => {
     const { isDarkTheme } = useTheme();
     const { gameId } = useParams<{ gameId: string }>();
+    const navigate = useNavigate();
     const gameData = pricelistdata.find(game => game.id === parseInt(gameId || '0'));
     const [selectedItems, setSelectedItems] = useState<Item[]>([]);
-    const [showMore, setShowMore] = useState(false); 
+    const [showMore, setShowMore] = useState(false);
+    const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-    if (!gameData) {
-        return <div className="text-center my-8">Game tidak ditemukan</div>;
-    }
+    // State untuk input
+    const [userId, setUserId] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [note, setNote] = useState('');
+
+    const [server, setServer] = useState('Asia');
+
+    // State untuk mengontrol modal
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+
+    // Ref untuk fokus input
+    const userIdRef = useRef<HTMLInputElement>(null);
+    const userNameRef = useRef<HTMLInputElement>(null);
+    const userPasswordRef = useRef<HTMLInputElement>(null);
+    const userNoteRef = useRef<HTMLInputElement>(null);
+
+    const themeColors = useMemo(() => ({
+        background: isDarkTheme ? 'bg-slate-800' : 'bg-white',
+        text: isDarkTheme ? 'text-white' : 'text-black',
+        secondaryBackground: isDarkTheme ? 'bg-slate-950' : 'bg-slate-100',
+        border: isDarkTheme ? 'border-slate-300' : 'border-gray-300',
+    }), [isDarkTheme]);
+
+    if (!gameData) return <div className="text-center my-8">Game tidak ditemukan</div>;
 
     const handleSelectItem = (item: Item) => {
-        setSelectedItems(prevSelected => {
-            const isItemSelected = prevSelected.find(selected => selected.item === item.item);
+        setSelectedItems(prev =>
+            prev.find(selected => selected.item === item.item)
+                ? prev.filter(selected => selected.item !== item.item)
+                : [...prev, item]
+        );
+    };
 
-            if (isItemSelected) {
-                return prevSelected.filter(selected => selected.item !== item.item);
-            } else {
-                return [...prevSelected, item];
+    const handleSelectMethod = (method: string) => {
+        setSelectedMethods(prevMethods =>
+            prevMethods.includes(method)
+                ? prevMethods.filter(m => m !== method)
+                : [...prevMethods, method]
+        );
+    };
+
+
+    const totalPrice = selectedItems.reduce((total, { price }) => total + parseInt(price.replace(/[^\d]/g, '')), 0);
+
+    const totalFeePrice = (optionName: string) => {
+        let totalPriceWithFee = totalPrice;
+        selectedMethods.forEach((methodId) => {
+            const selectedMethodData = paymentMethods.find(method => method.id === methodId);
+            const selectedOption = selectedMethodData?.options.find(option => option.name === optionName);
+
+            if (selectedOption) {
+                const feePercentage = (totalPrice * selectedOption.fee) / 100;
+                totalPriceWithFee += feePercentage;
+            }
+        });
+
+        return totalPriceWithFee;
+    };
+
+    const Section: React.FC<{ title: string; no: string; children: React.ReactNode }> = ({ title, no, children }) => (
+        <div className={`${themeColors.background} ${themeColors.text} shadow-lg rounded-lg p-4 md:p-8 mx-4`}>
+            <div className="flex gap-3 items-center mb-4">
+                <h2 className="text-xl bg-sky-500 w-8 h-8 rounded-full font-semibold text-white flex justify-center items-center">{no}</h2>
+                <h2 className="text-xl font-semibold">{title}</h2>
+            </div>
+            <hr className={`border-t mb-4 ${themeColors.border}`} />
+            {children}
+        </div>
+    );
+
+    const Modal = ({ message, onClose }: { message: string; onClose: () => void }) => {
+        if (!modalVisible) return null;
+        return (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+                    <p>{message}</p>
+                    <button
+                        onClick={onClose}
+                        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        );
+    };
+
+    const handlePurchase = () => {
+        if (!userId.trim()) {
+            setModalMessage('User ID tidak boleh kosong.');
+            setModalVisible(true);
+            userIdRef.current?.focus();
+            return;
+        }
+        if (!username.trim()) {
+            setModalMessage('Username/Email tidak boleh kosong.');
+            setModalVisible(true);
+            userNameRef.current?.focus();
+            return;
+        }
+        if (!password.trim()) {
+            setModalMessage('Password tidak boleh kosong.');
+            setModalVisible(true);
+            userPasswordRef.current?.focus();
+            return;
+        }
+        if (selectedItems.length === 0) {
+            setModalMessage('Silakan pilih paket yang ingin dibeli.');
+            setModalVisible(true);
+            return;
+        }
+        const totalPriceWithFee = totalFeePrice(selectedOption || "");
+
+        navigate('/invoice', {
+            state: {
+                userId,
+                username,
+                server,
+                password,
+                note,
+                selectedItems,
+                totalPrice,
+                selectedMethods,
+                selectedOption,
+                totalPriceWithFee,
             }
         });
     };
 
-    // Calculate total price
-    const totalPrice = selectedItems.reduce((total, item) => total + parseInt(item.price.replace(/[^\d]/g, '')), 0);
+
+
+    useEffect(() => {
+        userIdRef.current?.focus();
+    }, [userId]);
+
+    useEffect(() => {
+        userNameRef.current?.focus();
+    }, [username]);
+
+    useEffect(() => {
+        userPasswordRef.current?.focus();
+    }, [password]);
+
+    useEffect(() => {
+        userNoteRef.current?.focus();
+    }, [note]);
+
+    useEffect(() => {
+        if (modalVisible) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [modalVisible]);
 
     return (
         <div className="max-w-7xl mx-auto my-8">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 md:gap-4 lg:gap-0">
                 {/* Left Section - Game Info */}
                 <div className="lg:col-span-1">
-                    <div className={`${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'} shadow-lg rounded-lg p-8 Hp:px-14 lg:px-4`}>
-                        <div className='grid grid-cols-2 lg:grid-cols-1 gap-10 items-center'>
-                            <h2 className="hidden lg:flex text-2xl font-bold font-Poppins mt-4 mb-2">{gameData.name}</h2>
-                            <img src={gameData.image} alt={gameData.name} className="w-3/4 lg:w-full h-auto rounded" width={500} height={500} />
-                            <h2 className="flex lg:hidden text-2xl font-bold font-Poppins mt-4 mb-2 justify-center">{gameData.name}</h2>
+                    <div className={`${themeColors.background} ${themeColors.text} shadow-lg rounded-lg p-4 lg:p-5 mx-4 lg:mx-0`}>
+                        <div className='grid grid-cols-2 lg:grid-cols-1 gap-4 items-center'>
+                            <h2 className="hidden lg:flex text-2xl font-bold mt-4">{gameData.name}</h2>
+                            <img src={gameData.image} alt={gameData.name} className="w-3/4 lg:w-full h-auto rounded" />
+                            <h2 className="flex lg:hidden text-2xl font-bold mt-4 justify-center">{gameData.name}</h2>
                         </div>
-                        <p className="my-2 font-semibold font-Poppins">DESKRIPSI PRODUK</p>
+                        <p className="my-2 mt-4 font-semibold">DESKRIPSI PRODUK</p>
                         <hr className="border-t my-4 border-slate-300" />
                         <p className='text-justify'>
-                            {showMore ? 
-                                "Kami mempersembahkan layanan yang cepat, murah, serta aman dan terpercaya! Tingkatkan akun anda  dengan bantuan dari profesional kami. Kami mengutamakan kepuasan dan keamanan akun Anda dalam setiap jasa yang kami berikan." 
-                                :
-                                ""
+                            {showMore
+                                ? "Kami mempersembahkan layanan yang cepat, murah, serta aman dan terpercaya! Tingkatkan akun anda dengan bantuan dari profesional kami. Kami mengutamakan kepuasan dan keamanan akun Anda dalam setiap jasa yang kami berikan."
+                                : ""
                             }
                         </p>
-                        <div>
-                            <button onClick={() => setShowMore(!showMore)} className="text-blue-500 underline mt-2 flex items-center">
-                                {showMore ? 'Lihat lebih sedikit' : 'Lihat lebih banyak'}
-                                {showMore ? <IoIosArrowUp className="ml-2" /> : <IoIosArrowDown className="ml-2" />}
-                            </button>
-                        </div>
+                        <button onClick={() => setShowMore(!showMore)} className="text-blue-500 underline mt-2 flex items-center">
+                            {showMore ? 'Lihat lebih sedikit' : 'Lihat lebih banyak'}
+                            {showMore ? <IoIosArrowUp className="ml-2" /> : <IoIosArrowDown className="ml-2" />}
+                        </button>
                     </div>
                 </div>
-                <div className="lg:col-span-3 space-y-6">
-                    {/* User UID Information */}
-                    <div className={`${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'} shadow-lg rounded-lg p-8`}>
-                        <div className="flex gap-3 items-center mb-4">
-                            <h2 className="text-xl bg-sky-500 w-8 h-8 rounded-full font-semibold text-white flex justify-center items-center font-Poppins">1</h2>
-                            <h2 className="text-xl font-semibold font-Poppins">Masukkan Data Akun</h2>
-                        </div>
-                        <hr className="border-t mb-4 border-slate-300" />
 
+                <div className="lg:col-span-3 space-y-4">
+                    {/* User UID Information */}
+                    <Section title="Masukkan Data Akun" no="1">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <input
                                 type="text"
                                 placeholder="Masukkan User ID Anda"
-                                className="border border-gray-300 p-2 rounded-lg w-full"
+                                className={`border ${themeColors.border} ${themeColors.secondaryBackground} p-2 rounded-lg w-full`}
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                                ref={userIdRef}
                                 aria-label="Masukkan User ID Anda"
                             />
                             <select
-                                className="border border-gray-300 p-2 rounded-lg w-full"
-                                aria-label="Pilih Region"
+                                className={`border ${themeColors.border} ${themeColors.secondaryBackground} ${themeColors.text} p-2 rounded-lg w-full`}
+                                value={server}
+                                onChange={(e) => setServer(e.target.value)}
+                                aria-label="Pilih Server"
                             >
                                 <option value="Asia">Asia</option>
                                 <option value="NA">NA</option>
@@ -91,50 +237,46 @@ const Order = () => {
                             <input
                                 type="text"
                                 placeholder="Masukkan Username/Email Akun"
-                                className="border border-gray-300 p-2 rounded-lg w-full"
+                                className={`border ${themeColors.border} ${themeColors.secondaryBackground} p-2 rounded-lg w-full`}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                ref={userNameRef}
                                 aria-label="Masukkan Username/Email Akun"
                             />
                             <input
                                 type="text"
                                 placeholder="Masukkan Password"
-                                className="border border-gray-300 p-2 rounded-lg w-full"
+                                className={`border ${themeColors.border} ${themeColors.secondaryBackground} p-2 rounded-lg w-full`}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                ref={userPasswordRef}
                                 aria-label="Masukkan Password"
                             />
                             <input
                                 type="text"
                                 placeholder="Ketik Catatan Untuk Penjoki"
-                                className="border border-gray-300 p-2 rounded-lg w-full sm:col-span-2"
+                                value={note}
+                                onChange={(e) => setNote(e.target.value)}
+                                ref={userNoteRef}
+                                className={`border ${themeColors.border} ${themeColors.secondaryBackground} p-2 rounded-lg w-full sm:col-span-2`}
                                 aria-label="Ketik Catatan Untuk Penjoki"
                             />
                         </div>
-                        <p className="text-sm font-semibold font-Poppins mt-2">
-                            Pastikan untuk membaca semua informasi, syarat & ketentuan sebelum melakukan pemesanan untuk memastikan bahwa Anda mendapatkan layanan terbaik dan sesuai ekspektasi.
-                        </p>
-                    </div>
+                        <p className="text-sm font-semibold mt-2">Pastikan untuk membaca semua informasi, syarat & ketentuan sebelum melakukan pemesanan untuk memastikan bahwa Anda mendapatkan layanan terbaik dan sesuai ekspektasi.</p>
+                    </Section>
 
                     {/* Category and Item Selection */}
-                    <div className={`${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'} shadow-lg rounded-lg p-8`}>
-                        <div className="flex gap-3 items-center mb-4">
-                            <h2 className="text-xl bg-sky-500 w-8 h-8 rounded-full font-semibold text-white flex justify-center items-center font-Poppins">2</h2>
-                            <h2 className="text-xl font-semibold font-Poppins">Pilih Paket</h2>
-                        </div>
-                        <hr className="border-t mb-4 border-slate-300" />
-                        {/* Iterate through the categories */}
+                    <Section title="Pilih Paket" no='2'>
                         {Object.entries(gameData.categories).map(([category, items], idx) => (
                             <div key={idx}>
                                 <h4 className="text-lg text-sky-500 font-semibold mb-1">{category}</h4>
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-5">
-                                    {/* Iterate through the items in each category */}
                                     {(items as Item[]).map((item, index) => (
                                         <button
                                             key={index}
                                             onClick={() => handleSelectItem(item)}
-                                            className={`
-                                                ${selectedItems.includes(item)
-                                                    ? 'bg-blue-500 text-white'
-                                                    : `${isDarkTheme ? 'bg-slate-950 text-white' : 'bg-slate-100 text-black'}`}
-                                                p-4 rounded-lg text-center shadow-md hover:scale-105 transition-transform duration-300
-                                            `}
+                                            className={`p-4 rounded-lg text-center shadow-md transition-transform duration-300
+                                                ${selectedItems.includes(item) ? 'bg-blue-500 text-white' : `${themeColors.secondaryBackground} ${themeColors.text}`}`}
                                         >
                                             <span>{item.item}</span>
                                             <p className="text-sm text-gray-500">{item.price}</p>
@@ -143,37 +285,97 @@ const Order = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </Section>
 
                     {/* Display selected items and total price */}
-                    <div className={`${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'} shadow-lg rounded-lg p-8`}>
-                        <div className="flex gap-3 items-center mb-4">
-                            <h2 className="text-xl bg-sky-500 w-8 h-8 rounded-full font-semibold text-white flex justify-center items-center font-Poppins">3</h2>
-                            <h2 className="text-xl font-semibold font-Poppins">Paket Yang Dipilih</h2>
-                        </div>
-                        <hr className="border-t mb-4 border-slate-300" />
-                        <div className={`${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-white text-black'} border-dotted border-sky-500 border-2 shadow-lg rounded-lg p-8`}>
+                    <Section title="Paket Yang Dipilih" no='3'>
+                        <div className={`${themeColors.background} ${themeColors.text} border-dotted border-sky-500 border-2 shadow-lg rounded-lg p-4 md:p-8`}>
                             {selectedItems.length === 0 ? (
                                 <p className="text-gray-500">Belum ada item yang dipilih.</p>
                             ) : (
                                 <ul className="space-y-2">
                                     {selectedItems.map((item, index) => (
-                                        <li key={index} className="flex justify-between">
-                                            <span>{item.item}</span>
-                                            <span>{item.price}</span>
-                                        </li>
+                                        <div key={index} className={`${themeColors.secondaryBackground} ${themeColors.text} p-2 rounded-lg`}>
+                                            <li className="flex justify-between">
+                                                <span>{item.item}</span>
+                                                <span>{item.price}</span>
+                                            </li>
+                                        </div>
                                     ))}
                                 </ul>
                             )}
                         </div>
                         <hr className="border-t my-4 border-slate-300" />
-                        <div className="flex justify-between font-semibold font-Poppins">
+                        <div className="flex justify-between font-semibold">
                             <span>Total Harga:</span>
                             <span>Rp {totalPrice.toLocaleString('id-ID')}</span>
                         </div>
-                    </div>
+                    </Section>
+
+                    <Section title='Pilih Metode Pembayaran' no='4'>
+                        {paymentMethods.map((method) => (
+                            <div
+                                key={method.id}
+                                className={`cursor-pointer p-4 border rounded-lg mb-4 ${themeColors.secondaryBackground} ${themeColors.text}`}
+                                onClick={() => handleSelectMethod(method.id)}
+                            >
+                                <div className='flex justify-between items-center'>
+                                    <p className="font-bold">{method.name}</p>
+                                </div>
+                                <p className="text-sm text-gray-500 mb-4">{method.description}</p>
+                                <div className='flex justify-between items-center'>
+                                    {selectedMethods.includes(method.id) && (
+                                        <div className='flex flex-col gap-2 w-full mb-5'>
+                                            {method.options.map((option) => (
+                                                <button
+                                                    key={option.name}
+                                                    className={`p-2 border rounded-lg flex justify-between items-center 
+                                                                ${selectedOption === option.name ? 'border-blue-500 border-2' : 'border-gray-200'} 
+                                                                ${isDarkTheme ? 'bg-slate-800' : 'bg-white'}`}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setSelectedOption(prev => prev === option.name ? null : option.name);
+                                                    }}
+                                                >
+                                                    <div>
+                                                        <img src={option.image} alt={`${option.name} Icon`} />
+                                                        <p className="font-bold text-center">{option.name}</p>
+                                                    </div>
+                                                    <p className="text-sm font-semibold">Rp {totalFeePrice(option.name).toLocaleString('id-ID')}</p>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <div className={`${!selectedMethods.includes(method.id) ? 'flex' : 'hidden'}`}>
+                                        {method.options.map((option, index) => (
+                                            <img key={index} src={option.image} alt={`${option.name} Icon`} />
+                                        ))}
+                                    </div>
+                                    <div className={`${!selectedMethods.includes(method.id) ? 'flex' : 'hidden'}`}>
+                                        {selectedMethods.includes(method.id) ? <FaAngleUp /> : <FaAngleDown />}
+                                    </div>
+                                </div>
+                                <div className={`${selectedMethods.includes(method.id) ? 'flex justify-end' : 'hidden'}`}>
+                                    {selectedMethods.includes(method.id) ? <FaAngleUp /> : <FaAngleDown />}
+                                </div>
+                            </div>
+                        ))}
+                    </Section>
+
+                    <button
+                        onClick={handlePurchase}
+                        className={`flex items-center justify-center m-4 px-4 py-2 rounded-md ${userId && username && password && selectedItems.length > 0 && selectedOption ? 'bg-sky-500 cursor-pointer' : 'bg-gray-500 cursor-not-allowed'}`}
+                        disabled={!userId || !username || !password || selectedItems.length === 0 || !selectedOption}
+                    >
+                        <MdOutlineShoppingCart className='mr-2' />
+                        Pesan Paket
+                    </button>
+
                 </div>
             </div>
+
+            {/* Render Modal */}
+            <Modal message={modalMessage} onClose={() => setModalVisible(false)} />
         </div>
     );
 };

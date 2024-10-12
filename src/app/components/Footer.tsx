@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className="container mx-auto py-6 mb-14  md:mb-0">
             <hr className={`border-t mb-4 border-slate-300`}/>
-            <div className="flex justify-between items-center p-2">
+            <div className="flex justify-between items-center p-5">
                 <h1 className="font-poppins text-base">
                     &copy; 2024 Journey Ease. All Rights Reserved.
                 </h1>
@@ -23,7 +23,7 @@ const Footer = () => {
                     )}
                 </button>
             </div>
-            <div className='mb-14'></div>
+            <div className='mb-0 md:mb-14'></div>
         </footer>
     );
 }

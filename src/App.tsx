@@ -6,6 +6,7 @@ import PriceList from './app/pages/PriceList';
 import ScrollToTop from '../src/app/functions/ScrollTop'; 
 import ContactPage from './app/pages/ContactPage';
 import OrderPage from './app/pages/OrderPage'
+import Invoice from './app/pages/InvoicePage'
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="pricelist" element={<PriceList />} />
+          <Route path="/pricelist" element={<PriceList />} />
           <Route path='/contact' element={<ContactPage />} />
           <Route path="/order/:gameId" element={<OrderPage />} />
+          <Route path="/invoice" element={<Invoice />} />
         </Routes>
       </Router>
     </ThemeProvider>
