@@ -7,12 +7,14 @@ import ScrollToTop from '../src/app/functions/ScrollTop';
 import ContactPage from './app/pages/ContactPage';
 import OrderPage from './app/pages/OrderPage'
 import Invoice from './app/pages/InvoicePage'
+import Navbar from './app/components/NavBar';
 
 function App() {
   return (
     <ThemeProvider>
       <Router>
         <ScrollToTop />
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/pricelist" element={<PriceList />} />

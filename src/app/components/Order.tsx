@@ -155,29 +155,28 @@ const Order = () => {
         });
     };
 
-
-
+    useEffect(() => {
+        const textarea = userNoteRef.current;
+        if (textarea) {
+            textarea.focus();
+            textarea.setSelectionRange(note.length, note.length);
+        }
+    }, [note]);
+    
+    useEffect(() => {
+        userPasswordRef.current?.focus();
+    }, [password]);
+    
+    useEffect(() => {
+        userNameRef.current?.focus();
+    }, [username]);
+    
     useEffect(() => {
         userIdRef.current?.focus();
     }, [userId]);
 
-    useEffect(() => {
-        userNameRef.current?.focus();
-    }, [username]);
 
-    useEffect(() => {
-        userPasswordRef.current?.focus();
-    }, [password]);
 
-    useEffect(() => {
-        const textarea = userNoteRef.current;
-
-        // Jika textarea ada, fokus dan set cursor ke akhir
-        if (textarea) {
-            textarea.focus();
-            textarea.setSelectionRange(note.length, note.length); // Set kursor ke akhir
-        }
-    }, [note]);
 
     useEffect(() => {
         if (modalVisible) {
@@ -194,7 +193,7 @@ const Order = () => {
         <div className="max-w-7xl mx-auto my-8">
             <div className="grid grid-cols-1 lg:grid-cols-4 md:gap-4 lg:gap-0">
                 {/* Left Section - Game Info */}
-                <div className="lg:col-span-1">
+                <div className="lg:col-span-1 mb-5 md:mb-0">
                     <div className={`${themeColors.background} ${themeColors.text} shadow-lg rounded-lg p-4 lg:p-5 mx-4 lg:mx-0`}>
                         <div className='grid grid-cols-2 lg:grid-cols-1 gap-4 items-center'>
                             <h2 className="hidden lg:flex text-2xl font-bold mt-4">{gameData.name}</h2>
@@ -263,9 +262,10 @@ const Order = () => {
                                 placeholder="Ketik Catatan Untuk Penjoki"
                                 value={note}
                                 onChange={(e) => setNote(e.target.value)}
-                                className={`border p-2 rounded-lg w-full sm:col-span-2 resize-none`}
+                                className={`${themeColors.border} ${themeColors.secondaryBackground} border p-2 rounded-lg w-full sm:col-span-2 resize-none`}
                                 aria-label="Ketik Catatan Untuk Penjoki"
                                 rows={4}
+                                tabIndex={-1}
                             />
                         </div>
                         <p className="text-sm font-semibold mt-2">Pastikan untuk membaca semua informasi, syarat & ketentuan sebelum melakukan pemesanan untuk memastikan bahwa Anda mendapatkan layanan terbaik dan sesuai ekspektasi.</p>
