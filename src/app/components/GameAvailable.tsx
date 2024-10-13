@@ -1,27 +1,8 @@
 import { useTheme } from '../functions/ThemeContext';
 import AnimationInBottom from '../animation/AnimationInBottom';
 import { useNavigate } from 'react-router-dom';
+import games from '../../assets/data/GamesData';
 
-const games = [
-    {
-        id: 1,
-        logo: '/Genshin_Impact.png',
-        name: 'Genshin Impact',
-        developer: 'Hoyoverse',
-    },
-    {
-        id: 2,
-        logo: '/Honkai_Star_Rail.png',
-        name: 'Honkai Star Rail',
-        developer: 'Hoyoverse',
-    },
-    {
-        id: 3,
-        logo: '/Wuthering_Waves.png',
-        name: 'Wuthering Waves',
-        developer: 'Kuro Games',
-    },
-];
 
 const GameAvailable = () => {
     const { isDarkTheme } = useTheme();

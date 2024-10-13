@@ -41,6 +41,8 @@ const ReviewCard = ({
                     src={doneimg}
                     alt={`${name} done`}
                     className="w-full h-auto rounded-md shadow-md aspect-video object-cover"
+                    width={160}
+                    height={90}
                 />
             </div>
         </figure>

@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import pricelistdata from '../../assets/data/PriceListData';
+import gamesdata from '../../assets/data/GamesData';
 import paymentMethods from '../../assets/data/PaymentMethod'
 import { useTheme } from '../functions/ThemeContext';
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -18,7 +18,7 @@ const Order = () => {
     const { isDarkTheme } = useTheme();
     const { gameId } = useParams<{ gameId: string }>();
     const navigate = useNavigate();
-    const gameData = pricelistdata.find(game => game.id === parseInt(gameId || '0'));
+    const gameData = gamesdata.find(game => game.id === parseInt(gameId || '0'));
     const [selectedItems, setSelectedItems] = useState<Item[]>([]);
     const [showMore, setShowMore] = useState(false);
     const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
@@ -197,7 +197,7 @@ const Order = () => {
                     <div className={`${themeColors.background} ${themeColors.text} shadow-lg rounded-lg p-4 lg:p-5 mx-4 lg:mx-0`}>
                         <div className='grid grid-cols-2 lg:grid-cols-1 gap-4 items-center'>
                             <h2 className="hidden lg:flex text-2xl font-bold mt-4">{gameData.name}</h2>
-                            <img src={gameData.image} alt={gameData.name} className="w-3/4 lg:w-full h-auto rounded" />
+                            <img src={gameData.logo}  alt={gameData.logo} className="w-3/4 lg:w-full h-auto rounded" />
                             <h2 className="flex lg:hidden text-2xl font-bold mt-4 justify-center">{gameData.name}</h2>
                         </div>
                         <p className="my-2 mt-4 font-semibold">DESKRIPSI PRODUK</p>

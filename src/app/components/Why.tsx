@@ -41,7 +41,7 @@ const Why = () => {
                         >
                             <div className='flex flex-row md:flex-col items-center md:items-center'>
                                 <div className="h-16 md:h-24 w-16 md:w-24 flex items-center justify-center mb-2">
-                                    <item.icon className="h-24 w-24" style={{ color: isDarkTheme ? '#4ADE80' : '#3B82F6' }} />
+                                    <item.icon className={`h-24 w-24 ${isDarkTheme ? 'text-sky-500' : 'text-[#3B82F6]'}`}  />
                                 </div>
                                 <h3 className="font-bold font-Poppins text-2xl md:text-4xl mb-2 text-center">{item.name}</h3>
                             </div>

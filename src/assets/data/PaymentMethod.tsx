@@ -7,12 +7,12 @@ const paymentMethods = [
             {
                 name: 'QRIS',
                 fee: 2,
-                image: '/payments/QRIS.png',
+                image: '/payments/QRIS.webp',
             },
             {
                 name: 'Shopeepay',
                 fee: 4,
-                image: '/payments/SHOPEEPAY.png',
+                image: '/payments/SHOPEEPAY.webp',
             },
         ],
     },
@@ -24,7 +24,7 @@ const paymentMethods = [
             {
                 name: 'BCA Bank',
                 fee: 8,
-                image: '/payments/BCA.png',
+                image: '/payments/BCA.webp',
             },
         ],
     },

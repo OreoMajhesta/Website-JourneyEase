@@ -6,13 +6,13 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 const slides = [
     {
-        image: '/banner1.png',
+        image: '/banner1.webp',
     },
     {
-        image: '/banner2.png',
+        image: '/banner2.webp',
     },
     {
-        image: '/banner3.png',
+        image: '/banner3.webp',
     },
 ];
 
@@ -37,6 +37,8 @@ const CarouselBanner = () => {
                                 src={slide.image}
                                 alt={`Slide ${index + 1}`}
                                 className="h-full w-full object-cover"
+                                width={500}
+                                height={500}
                             />
                         </SwiperSlide>
                     ))}

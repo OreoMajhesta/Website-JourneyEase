@@ -46,8 +46,8 @@ const Navbar = () => {
     return (
         <nav>
             <div
-                className={`transition-all duration-500 bg-opacity-60 backdrop-blur-sm
-                            ${navbarState === 0 ? 'w-full translate-y-0 rounded-none border-none' : ''}
+                className={`transition-all duration-500 bg-opacity-70 backdrop-blur-sm
+                            ${navbarState === 0 ? 'w-full py-6 translate-y-0 rounded-none border-none' : ''}
                             ${navbarState === 1 ? 'w-11/12 translate-y-5' : ''}
                             ${navbarState === 2 ? '-translate-y-full w-0' : ''}
                             ${navbarState === 3 ? 'translate-y-5 w-11/12' : ''}
@@ -58,7 +58,7 @@ const Navbar = () => {
                 <div className="px-2 md:px-10 lg:px-16 mx-auto flex items-center justify-between">
                     <div className="flex items-center font-bold text-2xl space-x-3">
                         <img
-                            src="/logo.png"
+                            src="/logo.webp"
                             alt="Logo"
                             className="h-8 lg:h-10 xl:h-12 w-auto cursor-pointer"
                             width={500}
