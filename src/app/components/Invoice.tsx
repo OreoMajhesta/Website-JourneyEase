@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import paymentMethods from '../../assets/data/PaymentMethod'; // Pastikan path ini benar
+import paymentMethods from '../../assets/data/PaymentMethod';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useTheme } from '@/functions/ThemeContext';
 
@@ -97,7 +97,7 @@ const Invoice = () => {
                                             <strong>{method.name}</strong>: {method.description}
                                             <ul>
                                                 {method.options
-                                                    .filter(option => option.name === selectedOption) // Filter options by selected option name
+                                                    .filter(option => option.name === selectedOption) 
                                                     .map(option => (
                                                         <li key={option.name}>
                                                             {option.name} - Biaya admin {option.fee}%

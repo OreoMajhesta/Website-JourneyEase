@@ -107,14 +107,6 @@ const Navbar = () => {
                     </li>
                     <li>
                         <button
-                            onClick={() => handleLinkClick('/')}
-                            className="flex flex-col text-sm hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
-                        >
-                            <icons.AiOutlineInfoCircle className='text-4xl hover:scale-110'/>
-                        </button>
-                    </li>
-                    <li>
-                        <button
                             onClick={() => handleLinkClick('/pricelist')}
                             className="flex flex-col text-sm hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >

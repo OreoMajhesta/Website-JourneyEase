@@ -6,13 +6,13 @@ const paymentMethods = [
         options: [
             {
                 name: 'QRIS',
-                fee: 1,
-                image: '/public/payments/QRIS.png',
+                fee: 2,
+                image: '/QRIS.png',
             },
             {
                 name: 'Shopeepay',
-                fee: 20,
-                image: '/public/payments/SHOPEEPAY.png',
+                fee: 4,
+                image: '/SHOPEEPAY.png',
             },
         ],
     },
@@ -23,8 +23,8 @@ const paymentMethods = [
         options: [
             {
                 name: 'BCA Bank',
-                fee: 5,
-                image: '/public/payments/BCA.png',
+                fee: 8,
+                image: '/BCA.png',
             },
         ],
     },

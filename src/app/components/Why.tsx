@@ -1,5 +1,6 @@
 import { useTheme } from '../functions/ThemeContext';
 import { icons } from '../../assets/icons/icons';
+import AnimationInBottom from '../animation/AnimationInBottom';
 
 const WhyItems = [
     {
@@ -33,18 +34,19 @@ const Why = () => {
             </div>
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-center justify-center">
                 {WhyItems.map((item, index) => (
-                    <div
-                        key={index}
-                        className={`${isDarkTheme ? 'bg-slate-800 border-gray-600' : 'bg-white border-gray-300'} shadow-lg rounded-2xl p-6 flex flex-col  h-full`}
-                    >
-                        <div className='flex flex-row md:flex-col items-center md:items-center'>
-                            <div className="h-16 md:h-24 w-16 md:w-24 flex items-center justify-center mb-2">
-                                <item.icon className="h-24 w-24" style={{ color: isDarkTheme ? '#4ADE80' : '#3B82F6' }} />
+                    <AnimationInBottom key={index} delay={(index + 1) * 0.2} duration={1} once={false}>
+                        <div
+                            className={`${isDarkTheme ? 'bg-slate-800 border-gray-600' : 'bg-white border-gray-300'} shadow-lg rounded-2xl p-6 flex flex-col  h-full`}
+                        >
+                            <div className='flex flex-row md:flex-col items-center md:items-center'>
+                                <div className="h-16 md:h-24 w-16 md:w-24 flex items-center justify-center mb-2">
+                                    <item.icon className="h-24 w-24" style={{ color: isDarkTheme ? '#4ADE80' : '#3B82F6' }} />
+                                </div>
+                                <h3 className="font-bold font-Poppins text-2xl md:text-4xl mb-2 ml-2">{item.name}</h3>
                             </div>
-                            <h3 className="font-bold font-Poppins text-2xl md:text-4xl mb-2 ml-2">{item.name}</h3>
+                            <p className="text-lg md:text-xl font-Poppins text-justify">{item.description}</p>
                         </div>
-                        <p className="text-lg md:text-xl font-Poppins text-justify">{item.description}</p>
-                    </div>
+                    </AnimationInBottom>
                 ))}
             </div>
         </section>

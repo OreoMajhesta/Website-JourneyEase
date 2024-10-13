@@ -40,7 +40,7 @@ const Order = () => {
     const userIdRef = useRef<HTMLInputElement>(null);
     const userNameRef = useRef<HTMLInputElement>(null);
     const userPasswordRef = useRef<HTMLInputElement>(null);
-    const userNoteRef = useRef<HTMLInputElement>(null);
+    const userNoteRef = useRef<HTMLTextAreaElement>(null);
 
     const themeColors = useMemo(() => ({
         background: isDarkTheme ? 'bg-slate-800' : 'bg-white',
@@ -170,7 +170,13 @@ const Order = () => {
     }, [password]);
 
     useEffect(() => {
-        userNoteRef.current?.focus();
+        const textarea = userNoteRef.current;
+
+        // Jika textarea ada, fokus dan set cursor ke akhir
+        if (textarea) {
+            textarea.focus();
+            textarea.setSelectionRange(note.length, note.length); // Set kursor ke akhir
+        }
     }, [note]);
 
     useEffect(() => {
@@ -252,14 +258,14 @@ const Order = () => {
                                 ref={userPasswordRef}
                                 aria-label="Masukkan Password"
                             />
-                            <input
-                                type="text"
+                            <textarea
+                                ref={userNoteRef}
                                 placeholder="Ketik Catatan Untuk Penjoki"
                                 value={note}
                                 onChange={(e) => setNote(e.target.value)}
-                                ref={userNoteRef}
-                                className={`border ${themeColors.border} ${themeColors.secondaryBackground} p-2 rounded-lg w-full sm:col-span-2`}
+                                className={`border p-2 rounded-lg w-full sm:col-span-2 resize-none`}
                                 aria-label="Ketik Catatan Untuk Penjoki"
+                                rows={4}
                             />
                         </div>
                         <p className="text-sm font-semibold mt-2">Pastikan untuk membaca semua informasi, syarat & ketentuan sebelum melakukan pemesanan untuk memastikan bahwa Anda mendapatkan layanan terbaik dan sesuai ekspektasi.</p>
@@ -338,7 +344,7 @@ const Order = () => {
                                                     }}
                                                 >
                                                     <div>
-                                                        <img src={option.image} alt={`${option.name} Icon`} />
+                                                        <img src={option.image} className={`${isDarkTheme ? 'bg-slate-500' : ''} rounded-xl`} alt={`${option.name} Icon`} />
                                                         <p className="font-bold text-center">{option.name}</p>
                                                     </div>
                                                     <p className="text-sm font-semibold">Rp {totalFeePrice(option.name).toLocaleString('id-ID')}</p>
@@ -348,7 +354,7 @@ const Order = () => {
                                     )}
                                     <div className={`${!selectedMethods.includes(method.id) ? 'flex' : 'hidden'}`}>
                                         {method.options.map((option, index) => (
-                                            <img key={index} src={option.image} alt={`${option.name} Icon`} />
+                                            <img key={index} src={option.image} className={`${isDarkTheme ? 'bg-slate-800' : ''} rounded-xl mr-2`} alt={`${option.name} Icon`} />
                                         ))}
                                     </div>
                                     <div className={`${!selectedMethods.includes(method.id) ? 'flex' : 'hidden'}`}>

@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
-import { icons } from '../../assets/icons/icons';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 const slides = [
     {
@@ -14,69 +17,88 @@ const slides = [
 ];
 
 const CarouselBanner = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-
-    const nextSlide = () => {
-        setCurrentSlide((prevIndex) => (prevIndex + 1) % slides.length);
-    };
-
-    const prevSlide = () => {
-        setCurrentSlide((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
-    };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            nextSlide();
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, [currentSlide]);
-
     return (
         <section>
-            <div className="relative container mx-auto h-auto overflow-hidden shadow-xl Hp:rounded-3xl -px-40">
-                <div
-                    className="flex transition-transform duration-1000 ease-in-out"
-                    style={{
-                        transform: `translateX(-${currentSlide * 100}%)`,
+            <div className="relative container mx-auto h-auto overflow-hidden shadow-xl Hp:rounded-3xl">
+                <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    navigation={{
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
                     }}
+                    pagination={{ clickable: true }}
+                    autoplay={{ delay: 5000 }}
+                    loop={true}
+                    className="w-full h-full"
                 >
                     {slides.map((slide, index) => (
-                        <div key={index} className="w-full h-full flex-shrink-0">
+                        <SwiperSlide key={index}>
                             <img
                                 src={slide.image}
                                 alt={`Slide ${index + 1}`}
-                                className="h-full w-full object-cover transition-all duration-500"
-                                width={500}
-                                height={500}
+                                className="h-full w-full object-cover"
                             />
-
-                        </div>
+                        </SwiperSlide>
                     ))}
-                </div>
 
-                <button
-                    onClick={prevSlide}
-                    className="absolute md:left-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white px-3 py-2 rounded-md text-2xl md:text-5xl font-bold text-center cursor-pointer"
-                >
-                    <icons.MdArrowBack />
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className="absolute right-0 md:right-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white px-3 py-2 rounded-md text-2xl md:text-5xl font-bold text-center cursor-pointer"
-                >
-                    <icons.MdArrowForward />
-                </button>
+                    {/* Tombol Navigasi */}
+                    <button className="hidden lg:flex swiper-button-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white p-3 rounded-md font-bold cursor-pointer md:p-8">
+                    </button>
+                    <button className="hidden lg:flex swiper-button-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white p-3 rounded-md font-bold cursor-pointer md:p-8">
+                    </button>
+                </Swiper>
 
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-5">
-                    {slides.map((_, index) => (
-                        <div
-                            key={index}
-                            className={`Hp:w-5 Hp:h-5 w-3 h-3 rounded-full cursor-pointer transition-all duration-500 ${currentSlide === index ? 'bg-sky-500 w-8 Hp:w-16' : 'bg-gray-400'}`}
-                            onClick={() => setCurrentSlide(index)}
-                        />
-                    ))}
-                </div>
+                {/* Custom pagination styles in Tailwind */}
+                <style>{`
+                    .swiper-pagination-bullet {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        background-color: gray;
+                        opacity: 1;
+                        transition: all 0.5s ease-in-out; 
+                    }
+
+                    .swiper-pagination-bullet-active {
+                        background-color: rgb(14 165 233);
+                        width: 4rem;
+                        height: 1.5rem;
+                        border-radius: 9999px; 
+                        transition: all 0.5s ease-in-out;
+                    }
+                        
+                    .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+                        margin: 0 12px ;
+                    }
+
+                    /* Responsive styles */
+                    @media (max-width: 768px) {
+                        .swiper-pagination-bullet {
+                            width: 1rem;
+                            height: 1rem;
+                        }
+                        .swiper-pagination-bullet-active {
+                            width: 2rem;
+                            height: 1rem;
+                        }
+                        .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+                            margin: 0 8px ;
+                        }
+                    }
+
+                    @media (max-width: 480px) {
+                        .swiper-pagination-bullet {
+                            width: 0.75rem;
+                            height: 0.75rem;
+                        }
+                        .swiper-pagination-bullet-active {
+                            width: 1.5rem;
+                            height: 0.75rem;
+                        }
+                        .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+                            margin: 0 5px ;
+                        }
+                    }
+                `}</style>
             </div>
         </section>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import pricelistitems from "../../assets/data/PriceListData";
+import { useTheme } from '../functions/ThemeContext';
 
 interface Item {
     item: string;
@@ -8,6 +9,7 @@ interface Item {
 }
 
 const PriceList = () => {
+    const { isDarkTheme } = useTheme();
     const [selectedGame, setSelectedGame] = useState(pricelistitems[0]);
 
     return (
@@ -37,8 +39,8 @@ const PriceList = () => {
                     <tbody>
                         {Object.entries(selectedGame.categories).map(([category, items], idx) => (
                             <React.Fragment key={idx}>
-                                <tr className="bg-gray-200">
-                                    <td colSpan={2} className="p-4 font-semibold text-gray-700 text-center">{category}</td>
+                                <tr className={`transition-all duration-300 ${isDarkTheme ? 'bg-slate-800 text-white' : 'bg-gray-200 border-gray-300'}`}>
+                                    <td colSpan={2} className="p-4 font-semibold text-center">{category}</td>
                                 </tr>
                                 {(items as Item[]).map((item, index) => (
                                     <tr key={index} className="border-t border-gray-300">
