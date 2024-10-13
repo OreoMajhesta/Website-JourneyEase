@@ -14,6 +14,21 @@ const paymentMethods = [
                 fee: 4,
                 image: '/payments/SHOPEEPAY.webp',
             },
+            {
+                name: 'Gopay',
+                fee: 2,
+                image: '/payments/GOPAY.webp',
+            },
+            {
+                name: 'Dana',
+                fee: 0.5,
+                image: '/payments/DANA.webp',
+            },
+            {
+                name: 'OVO',
+                fee: 3,
+                image: '/payments/OVO.webp',
+            },
         ],
     },
     {

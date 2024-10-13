@@ -202,12 +202,11 @@ const Order = () => {
                         </div>
                         <p className="my-2 mt-4 font-semibold">DESKRIPSI PRODUK</p>
                         <hr className="border-t my-4 border-slate-300" />
-                        <p className='text-justify'>
+
                             {showMore
-                                ? "Kami mempersembahkan layanan yang cepat, murah, serta aman dan terpercaya! Tingkatkan akun anda dengan bantuan dari profesional kami. Kami mengutamakan kepuasan dan keamanan akun Anda dalam setiap jasa yang kami berikan."
+                                ? "Kami mempersembahkan layanan yang cepat, murah, serta aman dan terpercaya! Tingkatkan akun anda dengan bantuan dari profesional kami. Kami mengutamakan kepuasan dan keamanan akun Anda dalam setiap jasa yang kami berikan. Setiap"
                                 : ""
                             }
-                        </p>
                         <button onClick={() => setShowMore(!showMore)} className="text-blue-500 underline mt-2 flex items-center">
                             {showMore ? 'Lihat lebih sedikit' : 'Lihat lebih banyak'}
                             {showMore ? <IoIosArrowUp className="ml-2" /> : <IoIosArrowDown className="ml-2" />}
