@@ -114,7 +114,7 @@ const Invoice = () => {
                                                     .map(option => (
                                                         <li key={option.name}>
                                                             {option.name} - Biaya admin {option.fee}%
-                                                            <img src={option.image} alt={option.name} style={{ width: '50px', height: 'auto' }} />
+                                                            <img src={option.image} loading='lazy' width={50} alt={option.name} style={{height: 'auto' }} />
                                                         </li>
                                                     ))}
                                             </ul>

@@ -30,7 +30,7 @@ const Why = () => {
     return (
         <section className="py-20 mt-20">
             <div className="mx-auto mb-8 text-center">
-                <h2 className="text-2xl md:text-5xl font-bold mb-1 md:mb-10 font-Poppins">Kenapa Harus Pilih Joki Disini?</h2>
+                <h2 className="text-3xl md:text-5xl font-bold mb-1 md:mb-10 font-Poppins">Kenapa Harus Pilih Joki Disini?</h2>
             </div>
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 items-stretch justify-center">
                 {WhyItems.map((item, index) => (
@@ -41,11 +41,11 @@ const Why = () => {
                         >
                             <div className='flex flex-row md:flex-col items-center md:items-center'>
                                 <div className="h-16 md:h-24 w-16 md:w-24 flex items-center justify-center mb-2">
-                                    <item.icon className={`h-24 w-24 ${isDarkTheme ? 'text-sky-500' : 'text-[#3B82F6]'}`}  />
+                                    <item.icon className={`w-14 md:w-24 h-auto  ${isDarkTheme ? 'text-sky-500' : 'text-[#3B82F6]'}`}  />
                                 </div>
-                                <h3 className="font-bold font-Poppins text-2xl md:text-4xl mb-2 text-center">{item.name}</h3>
+                                <h3 className="font-bold font-Poppins text-2xl md:text-4xl mb-0 md:mb-2 text-center">{item.name}</h3>
                             </div>
-                            <p className="text-lg md:text-xl font-Poppins text-justify flex-grow">{item.description}</p>
+                            <p className="text-lg md:text-xl font-Poppins flex-grow">{item.description}</p>
                         </div>
                     </AnimationInBottom>
                 ))}

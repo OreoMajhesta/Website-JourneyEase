@@ -41,6 +41,17 @@ const gamesdata = [
                 { item: 'Mini Event Clear (No Explore Event)', price: 'Rp 50,000' },
                 { item: 'Big Event Clear (Explore, Quest, Sub Mision)', price: 'Rp 100,000' },
             ],
+            'Fishing': [
+                { item: 'The Catch', price: 'Rp 15,000' },
+                { item: 'Refinement for The Catch', price: 'Rp 10,000' },
+                { item: 'Fleuve Cendre Ferryman', price: 'Rp 15,000' },
+                { item: 'Refinement for Fleuve Cendre Ferryman', price: 'Rp 10,000' },
+            ],
+            'Quest': [
+                { item: 'Archon Quest/Chapter', price: 'Rp 15,000' },
+                { item: 'Story Quest Completion', price: 'Rp 10,000' },
+                { item: 'Hangout/Character Quest', price: 'Rp 5,000' },
+            ]
         }
     },
     {
@@ -49,17 +60,32 @@ const gamesdata = [
         name: 'Honkai Star Rail',
         developer: 'Hoyoverse',
         categories: {
-            'Daily Tasks': [
-                { item: 'Daily Training (per hari)', price: 'Rp 25,000' },
-            ],
-            'Farming': [
-                { item: 'Character EXP Material Farming (1 jam)', price: 'Rp 30,000' },
-                { item: 'Light Cone Farming (1 jam)', price: 'Rp 35,000' },
-                { item: 'Relic Farming (1 jam)', price: 'Rp 45,000' },
+            'Rawat Akun': [
+                { item: 'Monthly Full Package (Daily, Resin, Klaim Battle Pass, MOC, DU, PF Event)', price: 'Rp 270,000' },
+                { item: 'Weekly Package (Daily, Trailblaze Power, Klaim Battle Pass)', price: 'Rp 30,000' },
+                { item: 'Daily Package (Daily + Trailblaze Power)', price: 'Rp 4,000' },
             ],
             'Special Tasks': [
-                { item: 'Simulated Universe World 1-6 Clear', price: 'Rp 120,000' },
-                { item: 'Simulated Universe World 1-8 Full Clear', price: 'Rp 200,000' },
+                { item: 'Simulated Universe World 1-6 Clear', price: 'Rp 20,000' },
+                { item: 'Simulated Universe World 1-8 Full Clear', price: 'Rp 30,000' },
+                { item: 'Memory of Chaos', price: 'Rp 50,000' },
+            ],
+            'Story': [
+                { item: 'Story Xianzhou', price: 'Rp 35,000' },
+                { item: 'Story Penacony 2.0', price: 'Rp 25,000' },
+                { item: 'Story Penacony 2.1', price: 'Rp 25,000' },
+                { item: 'Story Penacony 2.2', price: 'Rp 30,000' },
+                { item: 'Story Penacony 2.3', price: 'Rp 20,000' },
+            ],
+            'Explore': [
+                { item: 'All chest Xianzhou', price: 'Rp 45,000' },
+                { item: 'Penacony 2.0 - All treasure', price: 'Rp 25,000' },
+                { item: 'Penacony 2.0 - All origami bird', price: 'Rp 15,000' },
+                { item: 'Penacony 2.1 - All treasure', price: 'Rp 20,000' },
+                { item: 'Penacony 2.1 - All origami bird', price: 'Rp 15,000' },
+                { item: 'Penacony 2.2 - All treasure', price: 'Rp 25,000' },
+                { item: 'Penacony 2.2 - All origami bird', price: 'Rp 15,000' },
+                { item: 'Penacony 2.3 - All chest+trash can+bird', price: 'Rp 15,000' },
             ]
         }
     },

@@ -39,6 +39,7 @@ const CarouselBanner = () => {
                                 className="h-full w-full object-cover"
                                 width={500}
                                 height={500}
+                                loading='lazy'
                             />
                         </SwiperSlide>
                     ))}

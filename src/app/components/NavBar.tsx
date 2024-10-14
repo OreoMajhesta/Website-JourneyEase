@@ -46,7 +46,7 @@ const Navbar = () => {
     return (
         <nav>
             <div
-                className={`transition-all duration-500 bg-opacity-70 backdrop-blur-sm
+                className={`transition-all duration-500 bg-opacity-65 backdrop-blur-sm
                             ${navbarState === 0 ? 'w-full py-6 translate-y-0 rounded-none border-none' : ''}
                             ${navbarState === 1 ? 'w-11/12 translate-y-5' : ''}
                             ${navbarState === 2 ? '-translate-y-full w-0' : ''}
@@ -63,6 +63,7 @@ const Navbar = () => {
                             className="h-8 lg:h-10 xl:h-12 w-auto cursor-pointer"
                             width={500}
                             height={500}
+                            loading='lazy'
                         />
                         <h1 className="text-3xl lg:text-4xl xl:text-5xl font-Rajdhani font-bold">Om JOKI</h1>
                     </div>
@@ -96,8 +97,8 @@ const Navbar = () => {
                         </ul>
 
                         <button
-                            onClick={() => handleLinkClick('/login')}
-                            className="bg-transparent border-sky-500 border-2 px-5 py-2 xl:px-10 xl:text-2xl hover:bg-sky-500 rounded-full font-medium font-Poppins"
+                            onClick={() => handleLinkClick('/')}
+                            className="bg-transparent border-sky-500 border-2 px-5 py-2 xl:px-10 xl:text-2xl hover:bg-gradient-to-r from-blue-400 to-sky-500 rounded-full font-medium font-Poppins"
                         >
                             Login
                         </button>
@@ -109,7 +110,7 @@ const Navbar = () => {
                     <li>
                         <button
                             onClick={() => handleLinkClick('/')}
-                            className="flex flex-col text-sm hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
+                            className="flex flex-col text-sm hover:bg-gradient-to-t from-blue-500 to-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.AiOutlineHome className='text-4xl hover:scale-110' />
                         </button>
@@ -117,7 +118,7 @@ const Navbar = () => {
                     <li>
                         <button
                             onClick={() => handleLinkClick('/pricelist')}
-                            className="flex flex-col text-sm hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
+                            className="flex flex-col text-sm hover:bg-gradient-to-t from-blue-500 to-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.AiOutlineTag className='text-4xl hover:scale-110' />
                         </button>
@@ -125,7 +126,7 @@ const Navbar = () => {
                     <li>
                         <button
                             onClick={() => handleLinkClick('/contact')}
-                            className="flex flex-col text-sm hover:bg-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
+                            className="flex flex-col text-sm hover:bg-gradient-to-t from-blue-500 to-sky-500 font-Poppins items-center justify-center p-3 px-5 rounded-b-full"
                         >
                             <icons.BsChat className='text-4xl hover:scale-110' />
                         </button>

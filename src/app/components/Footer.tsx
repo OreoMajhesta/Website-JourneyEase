@@ -8,7 +8,7 @@ const Footer = () => {
             <hr className={`border-t mb-4 border-slate-300`}/>
             <div className="flex justify-between items-center p-5">
                 <h1 className="font-poppins text-base">
-                    &copy; 2024 Journey Ease. All Rights Reserved.
+                    &copy; 2024 Om JOKI. Made by Oreo Majhesta
                 </h1>
 
                 <button 

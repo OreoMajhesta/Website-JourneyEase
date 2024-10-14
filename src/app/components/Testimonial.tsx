@@ -26,7 +26,7 @@ const ReviewCard = ({
         >
             <div>
                 <div className="flex flex-row items-center gap-2">
-                    <img className="rounded-full" width="50" height="50" alt="" src={profile} />
+                    <img className="rounded-full" width="50" height="50" loading="lazy" alt="" src={profile} />
                     <div className="flex flex-col">
                         <figcaption className="text-lg md:text-xl font-bold dark:text-white">
                             {name}
@@ -43,6 +43,7 @@ const ReviewCard = ({
                     className="w-full h-auto rounded-md shadow-md aspect-video object-cover"
                     width={160}
                     height={90}
+                    loading="lazy"
                 />
             </div>
         </figure>

@@ -6,7 +6,7 @@ export default function OrderPage() {
     const { isDarkTheme } = useTheme();
     return(
         <div className={`transition-colors duration-500 ${isDarkTheme ? 'bg-slate-950 text-white' : 'bg-slate-100 text-black'}`}>
-            <div className="px-4 sm:px-4 top-20 pt-28">
+            <div className="px-1 sm:px-4 top-20 pt-28">
                 <Order />
             </div>           
             <Footer />

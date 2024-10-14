@@ -197,7 +197,7 @@ const Order = () => {
                     <div className={`${themeColors.background} ${themeColors.text} shadow-lg rounded-lg p-4 lg:p-5 mx-4 lg:mx-0`}>
                         <div className='grid grid-cols-2 lg:grid-cols-1 gap-4 items-center'>
                             <h2 className="hidden lg:flex text-2xl font-bold mt-4">{gameData.name}</h2>
-                            <img src={gameData.logo}  alt={gameData.logo} className="w-3/4 lg:w-full h-auto rounded" />
+                            <img src={gameData.logo}  alt={gameData.logo} loading='lazy' className="w-3/4 lg:w-full h-auto rounded" />
                             <h2 className="flex lg:hidden text-2xl font-bold mt-4 justify-center">{gameData.name}</h2>
                         </div>
                         <p className="my-2 mt-4 font-semibold">DESKRIPSI PRODUK</p>
@@ -301,7 +301,7 @@ const Order = () => {
                                 <ul className="space-y-2">
                                     {selectedItems.map((item, index) => (
                                         <div key={index} className={`${themeColors.secondaryBackground} ${themeColors.text} p-2 rounded-lg`}>
-                                            <li className="flex justify-between">
+                                            <li className="flex flex-row gap-2 items-center justify-between">
                                                 <span>{item.item}</span>
                                                 <span>{item.price}</span>
                                             </li>
@@ -343,7 +343,7 @@ const Order = () => {
                                                     }}
                                                 >
                                                     <div>
-                                                        <img src={option.image} className={`${isDarkTheme ? 'bg-slate-500' : ''} rounded-xl`} alt={`${option.name} Icon`} />
+                                                        <img src={option.image} loading='lazy' width={50} height={50} className={`${isDarkTheme ? 'bg-slate-500' : ''} rounded-xl`} alt={`${option.name} Icon`} />
                                                         <p className="font-bold text-center">{option.name}</p>
                                                     </div>
                                                     <p className="text-sm font-semibold">Rp {totalFeePrice(option.name).toLocaleString('id-ID')}</p>
@@ -353,7 +353,7 @@ const Order = () => {
                                     )}
                                     <div className={`${!selectedMethods.includes(method.id) ? 'flex' : 'hidden'}`}>
                                         {method.options.map((option, index) => (
-                                            <img key={index} src={option.image} className={`${isDarkTheme ? 'bg-slate-800' : ''} rounded-xl mr-2`} alt={`${option.name} Icon`} />
+                                            <img key={index} src={option.image} loading='lazy' width={50} height={50}  className={`${isDarkTheme ? 'bg-slate-800' : ''} rounded-xl mr-2`} alt={`${option.name} Icon`} />
                                         ))}
                                     </div>
                                     <div className={`${!selectedMethods.includes(method.id) ? 'flex' : 'hidden'}`}>
